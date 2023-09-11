@@ -27,3 +27,18 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/.devcontainer/Dockerfile'
         tags: |
           $(tag)
+    - checkout: self
+    - task: SonarQubePrepare@4
+      displayName: Prepare analysis on SonarQube
+      inputs:
+        SonarQube: teste2
+        projectKey: ckp-teste-cloudhub
+        projectName: ckp teste cloudhub
+    - task: DotNetCoreCLI@2
+      displayName: dotnet build
+      inputs:
+        projects: '**/*.java'
+    - task: SonarQubeAnalyze@4
+      displayName: Run Code Analysis
+    - task: SonarQubePublish@4
+      displayName: Publish Quality Gate Result
