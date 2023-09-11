@@ -28,10 +28,6 @@ stages:
         tags: |
           $(tag)
   - job: Phase_1
-    displayName: Build Push Image
-    cancelTimeoutInMinutes: 1
-    pool:
-      vmImage: ubuntu-20.04
     steps:
     - checkout: self
     - task: SonarQubePrepare@4
