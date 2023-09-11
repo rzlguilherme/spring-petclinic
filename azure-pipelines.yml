@@ -27,9 +27,6 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/.devcontainer/Dockerfile'
         tags: |
           $(tag)
-  - job: Phase_1
-    steps:
-    - checkout: self
     - task: SonarQubePrepare@4
       displayName: Prepare analysis on SonarQube
       inputs:
